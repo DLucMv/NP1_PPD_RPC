@@ -31,7 +31,45 @@ def mostrar_tabuleiro(tab):
 
 
 # Ações do jogo
-acao = input("Digite 'jogar', 'mensagem' ou 'desistir': ").strip().lower()
+while True:
+    print("\nTabuleiro:")
+    for linha in proxy.obter_tabuleiro():
+        print(" ".join(linha))
 
-if acao == "desistir":
-    print(proxy.desistir(peca))
+    vencedor = proxy.obter_vencedor()
+    if vencedor:
+        print("\nFim de jogo:", vencedor)
+        break
+
+    fase = proxy.obter_fase()
+    vez = proxy.obter_vez()
+
+    print(f"\nFase {fase} | Sua peça: {peca} | Vez de: {vez}")
+
+    if vez != peca:
+        input("Aguardando o outro jogador... Pressione Enter para atualizar.")
+        continue
+
+    print(
+        "Opções: [1] Jogar  [2] Enviar mensagem  [3] Ver mensagens  [4] Desistir")
+    op = input("Escolha: ")
+
+    if op == "1":
+        if fase == 1:
+            jogada = input("Coloque sua peça (linha,coluna): ")
+            lin, col = map(int, jogada.split())
+            print(proxy.colocar_peca(peca, lin, col))
+        elif fase == 2:
+            entrada = input(
+                "Digite 4 números (linha,coluna iniciais e finais): ")
+            ox, oy, dx, dy = map(int, entrada.split())
+            print(proxy.mover_peca(peca, ox, oy, dx, dy))
+    elif op == "2":
+        msg = input("Mensagem: ")
+        # To-do Mensagem
+    elif op == "3":
+        msg = input("Mensagem: ")
+        # To-do Mensagem
+    elif op == "4":
+        print(proxy.desistir(peca))
+        break
