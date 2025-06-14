@@ -81,7 +81,21 @@ class SeegaServer:
                 if 0 <= capx < 5 and 0 <= capy < 5 and self.tabuleiro[capx][capy] == peca:
                     self.tabuleiro[adjx][adjy] = "❌"
 
-    # To-do métodos relativos as mensagens
+    def enviar_mensagem(self, nome, mensagem):
+        self.chat.append(f"{nome}: {mensagem}")
+        for jogador in self.jogadores:
+            if jogador[0] != nome:
+                if jogador[0] not in self.mensagens:
+                    self.mensagens[jogador[0]] = []
+                self.mensagens[jogador[0]].append(mensagem)
+        return "Mensagem enviada."
+
+    def obter_mensagem(self, nome):
+        if nome in self.mensagens and self.mensagens[nome]:
+            mensagens = self.mensagens[nome]
+            self.mensagens[nome] = []
+            return "\n".join(mensagens)
+        return "Nenhuma nova mensagem."
 
     def desistir(self, peca):
         self.finalizado = True

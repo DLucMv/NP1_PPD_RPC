@@ -66,10 +66,9 @@ while True:
             print(proxy.mover_peca(peca, ox, oy, dx, dy))
     elif op == "2":
         msg = input("Mensagem: ")
-        # To-do Mensagem
+        print(proxy.enviar_mensagem(nome, msg))
     elif op == "3":
-        msg = input("Mensagem: ")
-        # To-do Mensagem
+        print("Mensagens:\n", proxy.obter_mensagem(nome))
     elif op == "4":
         print(proxy.desistir(peca))
         break
