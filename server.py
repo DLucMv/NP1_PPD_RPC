@@ -29,8 +29,17 @@ class SeegaServer:
 
         return peca, "Aguardando o outro jogador..." if len(self.jogadores) < 2 else "O jogo começou!"
 
+    def obter_tabuleiro(self):
+        return self.tabuleiro
+
+    def desistir(self, peca):
+        self.finalizado = True
+        self.vencedor = "🔵" if peca == "🔴" else "🔴"
+        return f"O jogador {peca} desistiu. {self.vencedor} venceu! 🏆"
 
 # Configuração RPC
+
+
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ("/RPC",)
 
