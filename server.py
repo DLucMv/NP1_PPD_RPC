@@ -80,6 +80,21 @@ class SeegaServer:
             if 0 <= adjx < 5 and 0 <= adjy < 5 and self.tabuleiro[adjx][adjy] == oponente:
                 if 0 <= capx < 5 and 0 <= capy < 5 and self.tabuleiro[capx][capy] == peca:
                     self.tabuleiro[adjx][adjy] = "❌"
+        self.verificar_vencedor()
+
+    def verificar_vencedor(self):
+        pecas = {"⚫": 0, "⚪": 0}
+        for linha in self.tabuleiro:
+            for celula in linha:
+                if celula in pecas:
+                    pecas[celula] += 1
+
+        if pecas["⚫"] <= 1 and pecas["⚪"] > 1:
+            self.vencedor = "⚪"
+        elif pecas["⚪"] <= 1 and pecas["⚫"] > 1:
+            self.vencedor = "⚫"
+        elif pecas["⚫"] <= 1 and pecas["⚪"] <= 1:
+            self.vencedor = "Empate"
 
     def enviar_mensagem(self, nome, mensagem):
         self.chat.append(f"{nome}: {mensagem}")
