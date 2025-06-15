@@ -10,8 +10,17 @@ class SeegaGUI:
         self.proxy = xmlrpc.client.ServerProxy(
             "http://localhost:8000/RPC", allow_none=True)
 
-        self.nome = simpledialog.askstring("Nome", "Digite seu nome:")
-        self.peca, msg = self.proxy.entrar_jogo(self.nome)
+        try:
+            self.proxy = xmlrpc.client.ServerProxy(
+                "http://localhost:8000/RPC", allow_none=True)
+            self.nome = simpledialog.askstring("Nome", "Digite seu nome:")
+            self.peca, msg = self.proxy.entrar_jogo(self.nome)
+        except Exception as e:
+            messagebox.showerror(
+                "Erro de conexão", f"Não foi possível conectar ao servidor:\n{e}")
+            master.destroy()
+            return
+
         if not self.peca:
             messagebox.showerror("Erro", msg)
             master.destroy()
