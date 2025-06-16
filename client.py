@@ -1,3 +1,18 @@
+# UNIVERSIDADE: INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DO CEARÁ (IFCE) - CAMPUS FORTALEZA
+# DEPARTAMENTO DE TELEINFORMÁTICA
+# CURSO: ENGENHARIA DA COMPUTAÇÃO
+# DATA: 05/05/2025
+# ALUNO: Davison Lucas Mendes Viana
+#
+# 1) Objetivo: Implementar o jogo Seega usando sockets
+# 2) Funcionalidades Básicas
+# * Controle de turno, com definição de quem inicia a partida
+# * Movimentação das peças nos tabuleiros
+# * Desistência
+# * Chat para comunicação durante toda a partida
+# * Indicação de vencedor
+
+
 import xmlrpc.client
 import time
 
